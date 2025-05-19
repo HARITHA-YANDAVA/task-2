@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #6b3c67;
+      padding: 30px;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: rgb(144, 71, 71);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      background: #5c12a1;
+      color: rgb(150, 133, 133);
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="contactForm">
+    <h2>Contact Us</h2>
+    <label>Name:</label>
+    <input type="text" id="name" required />
+    <span class="error" id="nameError"></span>
+
+    <label>Email:</label>
+    <input type="email" id="email" required />
+    <span class="error" id="emailError"></span>
+
+    <label>Message:</label>
+    <textarea id="message" rows="4" required></textarea>
+    <span class="error" id="messageError"></span>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      let valid = true;
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('messageError').textContent = '';
+
+      if (name === '') {
+        document.getElementById('nameError').textContent = 'Name is required';
+        valid = false;
+      }
+
+      if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('emailError').textContent = 'Enter a valid email';
+        valid = false;
+      }
+
+      if (message === '') {
+        document.getElementById('messageError').textContent = 'Message is required';
+        valid = false;
+      }
+
+      if (valid) {
+        alert("Form submitted successfully!");
+        // You can clear the form here or send data via AJAX
+      }
+    });
+  </script>
+
+</body>
+</html>
